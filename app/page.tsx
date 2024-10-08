@@ -1,7 +1,22 @@
 import {TopBar} from "@/components/shared/top-bar";
 import {Container, Filters, ProductsGroupList, Title} from "@/components/shared";
+import {prisma} from "@/prisma/prisma-client";
 
-export default function Home() {
+
+export default async function Home() {
+
+    const categories = await prisma.category.findMany({
+        include: {
+            products: {
+                include: {
+                    productItems: true,
+                    ingredients: true
+                }
+            }
+        }
+    })
+
+    console.log(categories[0].products[0].productItems)
     return (
         <>
             <Container className={'mt-5'}>
@@ -16,74 +31,13 @@ export default function Home() {
                         <Filters/>
                     </div>
 
-                    {/*    Spisok tovarov*/}
-
                     <div className={'flex-1'}>
                         <div className={'flex flex-col gap-16'}>
-                            <ProductsGroupList title={'Пиццы'} items={[
-                                {
-                                    id: 1,
-                                    title: 'Пицца 1',
-                                    image: 'https://media.dodostatic.com/image/r:292x292/11EEC56DED320E72BF3ECBC039679024.avif',
-                                    price: 200
-                                },
-                                {
-                                    id: 2,
-                                    title: 'Пицца 2',
-                                    image: 'https://media.dodostatic.com/image/r:292x292/11EEC56DED320E72BF3ECBC039679024.avif',
-                                    price: 200
-
-                                },
-                                {
-                                    id: 3,
-                                    title: 'Пицца 3',
-                                    image: 'https://media.dodostatic.com/image/r:292x292/11EEC56DED320E72BF3ECBC039679024.avif'
-                                    ,
-                                    price: 200
-
-                                },
-                                {
-                                    id: 4,
-                                    title: 'Пицца 4',
-                                    image: 'https://media.dodostatic.com/image/r:292x292/11EEC56DED320E72BF3ECBC039679024.avif',
-                                    price: 200
-
-                                }
-                            ]} categoryId={1}/>
-
-
-                            <ProductsGroupList title={'Комбо'} items={[
-                                {
-                                    id: 1,
-                                    title: 'Пицца 1',
-                                    image: 'https://media.dodostatic.com/image/r:292x292/11EEC56DED320E72BF3ECBC039679024.avif',
-                                    price: 200
-                                },
-                                {
-                                    id: 2,
-                                    title: 'Пицца 2',
-                                    image: 'https://media.dodostatic.com/image/r:292x292/11EEC56DED320E72BF3ECBC039679024.avif',
-                                    price: 200
-
-                                },
-                                {
-                                    id: 3,
-                                    title: 'Пицца 3',
-                                    image: 'https://media.dodostatic.com/image/r:292x292/11EEC56DED320E72BF3ECBC039679024.avif'
-                                    ,
-                                    price: 200
-
-                                },
-                                {
-                                    id: 4,
-                                    title: 'Пицца 4',
-                                    image: 'https://media.dodostatic.com/image/r:292x292/11EEC56DED320E72BF3ECBC039679024.avif',
-                                    price: 200
-
-                                }
-                            ]} categoryId={2}/>
+                            {categories.map((category) => (
+                                category.products.length > 0 &&
+                                <ProductsGroupList title={category.name} key={category.id} items={category.products} categoryId={category.id}/>))
+                            }
                         </div>
-
                     </div>
                 </div>
             </Container>

@@ -10,7 +10,7 @@ import {useCategoryStore} from "@/store/category";
 type Props = {
     className?: string
     title: string
-    items: any[]
+    items: any
     listClassName?: string
     categoryId: number
 }
@@ -24,6 +24,7 @@ export const ProductsGroupList: React.FC<Props> = ({ className, title, items, li
         threshold: 0.4
     })
 
+
    useEffect(()=>{
        if (intersection?.isIntersecting) {
            setActiveCategoryId(categoryId)
@@ -35,13 +36,13 @@ export const ProductsGroupList: React.FC<Props> = ({ className, title, items, li
             <Title text={title} size={'lg'} className={'font-extrabold mb-5'}/>
 
             <div className={cn('grid grid-cols-3 gap-[50px]',listClassName)}>
-                {items.map((item) => (
+                {items.map((item: any) => (
                     <ProductCard
                         key={item.id}
                         id={item.id}
-                        name={item.title}
+                        name={item.name}
                         price={item.price}
-                        imageUrl={item.image}
+                        imageUrl={item.imageUrl}
                     />
                 ))}
             </div>

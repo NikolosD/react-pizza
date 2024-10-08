@@ -44,9 +44,10 @@ async function up() {
 
     await prisma.category.createMany(
         {
-            data: [{
-                name: 'Пиццы'
-            },
+            data: [
+                {
+                    name: 'Пиццы'
+                },
                 {
                     name: 'Закуски'
                 },
@@ -68,18 +69,22 @@ async function up() {
                 name: 'Пепперони фреш',
                 imageUrl: 'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp',
                 active: true,
+                price: randomNumber(200, 500),
                 categoryId: 1
             },
             {
                 name: 'Сырная',
                 imageUrl: 'https://media.dodostatic.net/image/r:233x233/11EE7D610CF7E265B7C72BE5AE757CA7.webp',
                 active: true,
+                price: randomNumber(200, 500),
+
                 categoryId: 2
             },
             {
                 name: 'Чоризо фреш',
                 imageUrl: 'https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
                 active: true,
+                price: randomNumber(200, 500),
                 categoryId: 3
             },
         ],
@@ -202,8 +207,10 @@ async function up() {
     const pizza1 = await prisma.product.create({
         data: {
             name: 'Пицца 1',
-            imageUrl: 'https://cdn.dodostatic.net/static/Img/Products/5f3b3f5e7f8d4d5e9e5f5f5f5f5f5f5f.png',
+            imageUrl: 'https://media.dodostatic.com/image/r:584x584/11EED854F2297224AED4D023A434721C.avif',
             categoryId: 1,
+            price: randomNumber(200, 500),
+
             ingredients: {
                 connect: [
                     {id: 1},
@@ -218,8 +225,9 @@ async function up() {
     const pizza2 = await prisma.product.create({
         data: {
             name: 'Пицца 2',
-            imageUrl: 'https://cdn.dodostatic.net/static/Img/Products/5f3b3f5e7f8d4d5e9e5f5f5f5f5f5f5f.png',
+            imageUrl: 'https://media.dodostatic.com/image/r:584x584/11EEC4B03A33B20DBEADA74187BB7B57.avif',
             categoryId: 1,
+            price: randomNumber(200, 500),
             ingredients: {
                 connect: [
                     {id: 4},
@@ -234,8 +242,9 @@ async function up() {
     const pizza3 = await prisma.product.create({
         data: {
             name: 'Пицца 3',
-            imageUrl: 'https://cdn.dodostatic.net/static/Img/Products/5f3b3f5e7f8d4d5e9e5f5f5f5f5f5f5f.png',
+            imageUrl: 'https://media.dodostatic.com/image/r:584x584/11EEC563863B334DB30FF678FA43E096.avif',
             categoryId: 1,
+            price: randomNumber(200, 500),
             ingredients: {
                 connect: [
                     {id: 7},
@@ -284,20 +293,20 @@ async function up() {
     })
 
 
-await prisma.cartItem.create({
-    data: {
-        productItemId: 1,
-        cartId: 1,
-        quantity: 2,
-        ingredients: {
-            connect: [
-                {id: 1},
-                {id: 2},
-                {id: 3},
-            ]
+    await prisma.cartItem.create({
+        data: {
+            productItemId: 1,
+            cartId: 1,
+            quantity: 2,
+            ingredients: {
+                connect: [
+                    {id: 1},
+                    {id: 2},
+                    {id: 3},
+                ]
+            }
         }
-    }
-})
+    })
 }
 
 
