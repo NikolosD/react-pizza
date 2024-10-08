@@ -69,6 +69,7 @@ export const Filters: React.FC<Props> = () => {
                 <RangeSlider min={0} max={1000} step={10}
                              value={[filters.prices.priceFrom || 0, filters.prices.priceTo || 1000]}
                              onValueChange={updatePrices}/>
+            {/*     test*/}
             </div>
 
 
