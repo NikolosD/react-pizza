@@ -16,13 +16,12 @@ export default async function Home() {
         }
     })
 
-    console.log(categories[0].products[0].productItems)
     return (
         <>
             <Container className={'mt-5'}>
                 <Title text={'Все пиццы'} size={'lg'} className={'font-extrabold'}/>
             </Container>
-            <TopBar/>
+            <TopBar category={categories.filter( (category) => category.products.length > 0)}/>
 
             <Container className={'pb-14 mt-[36px]'}>
                 <div className={'flex gap-[80px]'}>
