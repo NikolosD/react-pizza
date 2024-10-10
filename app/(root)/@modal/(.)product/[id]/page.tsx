@@ -10,7 +10,7 @@ export default async function ProductModelPage({params: {id}}: { params: { id: s
         },
         include: {
             ingredients: true,
-            productItems: true,
+            items: true,
         }
     })
 
