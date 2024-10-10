@@ -56,7 +56,7 @@ export const SearchInput: React.FC<Props> = ({className}) => {
                     {products.length > 0 && <div
                         className={cn('absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30', focused && 'visible opacity-100 top-12')}>
                         {products.map(product => (
-                            <Link href={`/product/${product.id}`} key={product.id} onClick={onClickItem}>
+                            <Link href={`/app/(root)/product/${product.id}`} key={product.id} onClick={onClickItem}>
                                 <div className={'px-3 py-2 hover:bg-primary/10 flex gap-3 items-center'}>
                                     <img className={'rounded-sm'} src={product.imageUrl} width={32} height={32}
                                          alt={product.name}/>

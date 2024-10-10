@@ -34,14 +34,15 @@ export const TopBar: React.FC<Props> = ({className,category}) => {
                 <Container className={'flex items-center justify-between'}>
                     <div
                         className={cn(
-                            'transition-all duration-500 ease-in-out cursor-pointer',
+                            'transition-all duration-500 ease-in-out cursor-pointer absolute left-[100px]',
                             showLogo ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
                         )}
                         onClick={handleLogoClick}
                     >
                         <img src="/logo.png" alt="Logo" className="w-12 h-12"/>
                     </div>
-                    <Categories items={category} />
+                    <Categories items={category}  />
+
                     <SortPopup/>
                 </Container>
             </div>
